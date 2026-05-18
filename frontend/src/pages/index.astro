@@ -310,6 +310,61 @@ import ProjectLayout from '../layouts/ProjectLayout.astro';
   </section>
 
   <!-- ═══════════════════════════════════════════════
+       CONTRIBUTE SECTION
+  ════════════════════════════════════════════════ -->
+  <section class="py-20 border-t border-border-subtle">
+    <div class="max-w-6xl mx-auto">
+      <div
+        class="group relative rounded-2xl p-8 sm:p-10 bg-white border border-border-subtle transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:border-emerald-300 flex flex-col sm:flex-row items-start sm:items-center gap-8"
+        style="animation: fadeIn 0.4s 0.44s ease both;"
+      >
+        <!-- Icon -->
+        <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center transition-colors duration-300 group-hover:bg-emerald-100">
+          <svg
+            class="w-7 h-7 text-emerald-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+          </svg>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <h2 class="font-display font-semibold text-xl text-text-primary">Soumettre un script</h2>
+            <span class="px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 font-mono text-xs font-medium">
+              Revue manuelle
+            </span>
+          </div>
+          <p class="font-body text-sm text-text-secondary leading-relaxed max-w-xl">
+            Vous avez un script Python scientifique ? Soumettez-le pour qu'il soit intégré comme nouveau module.
+          </p>
+        </div>
+
+        <!-- CTA -->
+        <a
+          href="/soumettre"
+          class="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-display font-semibold text-sm transition-colors duration-200 group-hover:gap-3"
+        >
+          Soumettre
+          <svg
+            class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
        FOOTER
   ════════════════════════════════════════════════ -->
   <footer class="py-14 border-t border-border-subtle">

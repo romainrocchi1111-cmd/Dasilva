@@ -1,0 +1,41 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import ScriptSubmitter from '../../components/ScriptSubmitter';
+
+const BADGES = [
+  { label: 'Soumettre un script',    bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700', dot: 'bg-emerald-400' },
+  { label: 'Validation automatique', bg: 'bg-blue-50',    border: 'border-blue-200',    text: 'text-blue-700',    dot: 'bg-blue-400'    },
+  { label: 'Revue manuelle',         bg: 'bg-amber-50',   border: 'border-amber-200',   text: 'text-amber-700',   dot: 'bg-amber-400'   },
+];
+---
+
+<ProjectLayout
+  title="Soumettre un Script — Portail Scientifique"
+  description="Soumettez votre script Python scientifique pour validation automatique et revue manuelle."
+>
+  <!-- Page header -->
+  <div class="pt-10 pb-8">
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+      {BADGES.map(({ label, bg, border, text, dot }) => (
+        <span class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border font-mono text-xs font-medium ${bg} ${border} ${text}`}>
+          <span class={`w-1.5 h-1.5 rounded-full ${dot}`} aria-hidden="true"></span>
+          {label}
+        </span>
+      ))}
+    </div>
+
+    <h1 class="font-display font-bold text-3xl sm:text-4xl text-text-primary mb-3 leading-tight">
+      Soumettre un Script Python
+    </h1>
+
+    <p class="font-body text-text-secondary text-base sm:text-lg max-w-2xl leading-relaxed">
+      Votre script sera exécuté automatiquement, puis transmis à Romain pour examen et intégration éventuelle au portail.
+    </p>
+  </div>
+
+  <!-- Divider -->
+  <div class="h-px bg-border-subtle mb-8" />
+
+  <!-- Form island -->
+  <ScriptSubmitter client:load />
+</ProjectLayout>
