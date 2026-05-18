@@ -129,21 +129,24 @@ export default function ScriptSubmitter() {
         }),
       });
 
+      console.log('Response status:', res.status);
+      console.log('Response ok:', res.ok);
+
       const data: { detail?: unknown; message?: unknown } = await res
         .json()
         .catch(() => ({ detail: 'Réponse invalide du serveur' }));
 
+      console.log('Response data:', JSON.stringify(data));
+
       if (!res.ok) {
-        console.error('Submit error:', data);
-        const raw = data.detail ?? data.message ?? 'Erreur serveur';
-        const detail =
-          typeof raw === 'string'
-            ? raw
-            : Array.isArray(raw)
-              ? (raw as Array<{ msg?: string }>).map((e) => e.msg ?? JSON.stringify(e)).join(', ')
-              : JSON.stringify(raw);
+        const message =
+          typeof data.detail === 'string'
+            ? data.detail
+            : Array.isArray(data.detail)
+              ? (data.detail as Array<{ msg?: string }>).map((e) => e.msg ?? JSON.stringify(e)).join(', ')
+              : JSON.stringify(data.detail) ?? 'Erreur serveur';
         if (res.status === 403) throw new Error('Mot de passe incorrect');
-        throw new Error(detail);
+        throw new Error(message);
       }
       setStatus('success');
     } catch (err: unknown) {
