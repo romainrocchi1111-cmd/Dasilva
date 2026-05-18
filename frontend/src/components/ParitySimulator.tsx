@@ -111,7 +111,7 @@ export default function ParitySimulator() {
     setIsLoading(true);
     setError(null);
     setResult(null);
-    const base = import.meta.env.VITE_BACKEND_URL ?? 'http://localhost:8000';
+    const base = 'https://dasilva-production.up.railway.app';
     try {
       const res = await fetch(`${base}/api/parity/run`, {
         method: 'POST',

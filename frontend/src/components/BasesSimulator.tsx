@@ -153,7 +153,7 @@ export default function BasesSimulator() {
     setIsLoading(true);
     setError(null);
     setResult(null);
-    const base = import.meta.env.VITE_BACKEND_URL ?? 'http://localhost:8000';
+    const base = 'https://dasilva-production.up.railway.app';
     try {
       const res = await fetch(`${base}/api/bases/run`, {
         method: 'POST',

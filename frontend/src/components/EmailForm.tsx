@@ -79,7 +79,7 @@ export default function EmailForm({ figures, module, onClose }: EmailFormProps) 
         .map((f) => ({ filename: `${f.key}.png`, data_b64: f.src, caption: f.title })),
     };
 
-    const base = import.meta.env.VITE_BACKEND_URL ?? 'http://localhost:8000';
+    const base = 'https://dasilva-production.up.railway.app';
 
     try {
       const res = await fetch(`${base}/api/send-graphs`, {
