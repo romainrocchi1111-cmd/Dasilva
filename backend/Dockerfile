@@ -1,10 +1,9 @@
 FROM python:3.11-slim
 WORKDIR /app
-ARG CACHEBUST=3
 RUN apt-get update && apt-get install -y libgomp1 && rm -rf /var/lib/apt/lists/*
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
+COPY backend/ .
 ENV MPLBACKEND=Agg
 ENV PORT=8000
 CMD ["python", "start.py"]
