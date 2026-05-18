@@ -30,6 +30,20 @@ const inputBase =
 const inputNormal = `${inputBase} border-border-subtle bg-white focus:ring-primary/30 focus:border-primary/60`;
 const inputError = `${inputBase} border-red-300 bg-white focus:ring-red-200`;
 
+function readFileAsBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      // result is "data:text/plain;base64,<b64>" — extract only the b64 part
+      const b64 = result.split(',')[1] ?? btoa(result);
+      resolve(b64);
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function ScriptSubmitter() {
   const [name, setName] = useState('');
   const [author, setAuthor] = useState('');
@@ -99,15 +113,22 @@ export default function ScriptSubmitter() {
       setProgressStep(step);
     }, 12_000);
 
-    const fd = new FormData();
-    fd.append('name', name);
-    fd.append('author', author);
-    fd.append('description', description);
-    fd.append('password', password);
-    fd.append('file', file!);
-
     try {
-      const res = await fetch(`${BACKEND}/api/submit-script`, { method: 'POST', body: fd });
+      const fileB64 = await readFileAsBase64(file!);
+
+      const res = await fetch(`${BACKEND}/api/submit-script`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          author,
+          description,
+          password,
+          filename: file!.name,
+          file_content: fileB64,
+        }),
+      });
+
       const data: { detail?: string; message?: string } = await res
         .json()
         .catch(() => ({ detail: 'Réponse invalide du serveur' }));
@@ -336,7 +357,7 @@ export default function ScriptSubmitter() {
           <FieldError msg={fieldErrors.file} />
         </div>
 
-        {/* Progress steps (loading) */}
+        {/* Progress steps */}
         {isLoading && (
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-5">
             <p className="font-display font-medium text-sm text-blue-800 mb-4">

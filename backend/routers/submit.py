@@ -1,14 +1,13 @@
 import ast
-import sys
-import io
 import base64
 import os
 import re
 import traceback
 import multiprocessing
 
-from fastapi import APIRouter, UploadFile, Form, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 import resend
 
 from utils.rate_limit import check_rate_limit
@@ -26,6 +25,15 @@ FORBIDDEN_IMPORTS = {
     "importlib", "ctypes", "multiprocessing", "threading",
     "eval", "exec", "open", "__import__",
 }
+
+
+class SubmitRequest(BaseModel):
+    name: str
+    author: str
+    description: str
+    password: str
+    filename: str
+    file_content: str  # base64-encoded .py file
 
 
 def _run_script(script_code: str, result_queue: multiprocessing.Queue) -> None:
@@ -75,19 +83,12 @@ def _run_script(script_code: str, result_queue: multiprocessing.Queue) -> None:
 
 
 @router.post("/submit-script")
-async def submit_script(
-    request: Request,
-    name: str = Form(...),
-    author: str = Form(...),
-    description: str = Form(...),
-    password: str = Form(...),
-    file: UploadFile = Form(...),
-) -> JSONResponse:
+async def submit_script(body: SubmitRequest, request: Request) -> JSONResponse:
     # Step 1 — Password
-    if password != SUBMIT_PASSWORD:
+    if body.password != SUBMIT_PASSWORD:
         raise HTTPException(status_code=403, detail="Mot de passe incorrect")
 
-    # Step 1b — Rate limit (after password check to avoid probing)
+    # Step 1b — Rate limit
     client_ip = request.client.host if request.client else "unknown"
     allowed, wait_minutes = check_rate_limit(client_ip)
     if not allowed:
@@ -96,14 +97,23 @@ async def submit_script(
             detail=f"Trop de soumissions. Réessayez dans {wait_minutes} min.",
         )
 
-    # Step 2 — File size
-    content = await file.read()
-    if len(content) > MAX_SCRIPT_SIZE:
+    # Step 2 — Decode file + size check
+    try:
+        script_bytes = base64.b64decode(body.file_content)
+    except Exception:
+        script_bytes = body.file_content.encode("utf-8")
+
+    if len(script_bytes) > MAX_SCRIPT_SIZE:
         raise HTTPException(status_code=413, detail="Fichier trop volumineux (max 100KB)")
+
+    try:
+        script_code = script_bytes.decode("utf-8")
+    except UnicodeDecodeError as e:
+        raise HTTPException(status_code=422, detail="Le fichier n'est pas du texte UTF-8 valide") from e
 
     # Step 3 — Syntax check
     try:
-        tree = ast.parse(content.decode("utf-8"))
+        tree = ast.parse(script_code)
     except SyntaxError as e:
         raise HTTPException(
             status_code=422,
@@ -130,7 +140,7 @@ async def submit_script(
     result_queue: multiprocessing.Queue = multiprocessing.Queue()
     proc = multiprocessing.Process(
         target=_run_script,
-        args=(content.decode("utf-8"), result_queue),
+        args=(script_code, result_queue),
     )
     proc.start()
     proc.join(timeout=TIMEOUT_SECONDS)
@@ -180,15 +190,15 @@ async def submit_script(
   <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
     <tr>
       <td style="padding:8px;font-weight:bold;width:140px;">Module</td>
-      <td style="padding:8px;">{name}</td>
+      <td style="padding:8px;">{body.name}</td>
     </tr>
     <tr style="background:#f8f9fb;">
       <td style="padding:8px;font-weight:bold;">Auteur</td>
-      <td style="padding:8px;">{author}</td>
+      <td style="padding:8px;">{body.author}</td>
     </tr>
     <tr>
       <td style="padding:8px;font-weight:bold;">Description</td>
-      <td style="padding:8px;">{description}</td>
+      <td style="padding:8px;">{body.description}</td>
     </tr>
   </table>
 
@@ -209,8 +219,8 @@ async def submit_script(
 
     attachments: list[dict] = [
         {
-            "filename": file.filename or "script.py",
-            "content": base64.b64encode(content).decode(),
+            "filename": body.filename or "script.py",
+            "content": base64.b64encode(script_bytes).decode(),
             "content_type": "text/x-python",
         }
     ]
@@ -228,7 +238,7 @@ async def submit_script(
             {
                 "from": sender,
                 "to": ADMIN_EMAIL,
-                "subject": f"[Portail] Nouveau script : {name} — par {author}",
+                "subject": f"[Portail] Nouveau script : {body.name} — par {body.author}",
                 "html": html_body,
                 "attachments": attachments,
             }
