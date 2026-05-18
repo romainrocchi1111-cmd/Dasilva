@@ -129,12 +129,19 @@ export default function ScriptSubmitter() {
         }),
       });
 
-      const data: { detail?: string; message?: string } = await res
+      const data: { detail?: unknown; message?: unknown } = await res
         .json()
         .catch(() => ({ detail: 'Réponse invalide du serveur' }));
 
       if (!res.ok) {
-        const detail = data.detail ?? 'Erreur serveur';
+        console.error('Submit error:', data);
+        const raw = data.detail ?? data.message ?? 'Erreur serveur';
+        const detail =
+          typeof raw === 'string'
+            ? raw
+            : Array.isArray(raw)
+              ? (raw as Array<{ msg?: string }>).map((e) => e.msg ?? JSON.stringify(e)).join(', ')
+              : JSON.stringify(raw);
         if (res.status === 403) throw new Error('Mot de passe incorrect');
         throw new Error(detail);
       }
