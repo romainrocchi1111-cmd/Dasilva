@@ -1,0 +1,183 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/', label: 'Accueil' },
+  { href: '/parity', label: 'Parité' },
+  { href: '/bases', label: 'Bases & H.' },
+  { href: '/poissons', label: '🐟 Poissons' },
+  { href: '/about', label: 'À propos' },
+] as const;
+
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/' || currentPath === '';
+  return currentPath.startsWith(href);
+};
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border-subtle">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group flex-shrink-0">
+        <div class="text-primary transition-colors duration-200">
+          <svg
+            class="w-8 h-8"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <circle cx="16" cy="16" r="2.5" fill="currentColor" />
+            <ellipse
+              cx="16"
+              cy="16"
+              rx="13"
+              ry="4.5"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <ellipse
+              cx="16"
+              cy="16"
+              rx="13"
+              ry="4.5"
+              stroke="currentColor"
+              stroke-width="1.5"
+              transform="rotate(60 16 16)"
+            />
+            <ellipse
+              cx="16"
+              cy="16"
+              rx="13"
+              ry="4.5"
+              stroke="currentColor"
+              stroke-width="1.5"
+              transform="rotate(120 16 16)"
+            />
+          </svg>
+        </div>
+        <span
+          class="font-display font-semibold text-lg text-text-primary hidden sm:block"
+        >
+          Portail Quantique
+        </span>
+      </a>
+
+      <!-- Desktop nav links -->
+      <div class="hidden md:flex items-center gap-1">
+        {
+          navLinks.map(({ href, label }) => (
+            <a
+              href={href}
+              class={[
+                'relative px-4 py-2 rounded-lg font-body text-sm font-medium transition-colors duration-200',
+                isActive(href)
+                  ? 'text-primary font-semibold'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-surface2',
+              ].join(' ')}
+            >
+              {label}
+              {isActive(href) && (
+                <span class="absolute bottom-0.5 left-3 right-3 h-0.5 bg-primary rounded-full" />
+              )}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Right side -->
+      <div class="flex items-center gap-3">
+        <span
+          class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-bg-base border border-border-subtle text-text-secondary font-body text-xs font-medium select-none"
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+          CPES L3
+        </span>
+
+        <!-- Hamburger -->
+        <button
+          id="hamburger"
+          class="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-bg-surface2 transition-colors duration-200"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+        >
+          <svg
+            id="icon-menu"
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+          <svg
+            id="icon-close"
+            class="w-5 h-5 hidden"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden border-t border-border-subtle bg-white"
+  >
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
+      {
+        navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class={[
+              'px-4 py-3 rounded-lg font-body text-sm font-medium transition-colors duration-200',
+              isActive(href)
+                ? 'text-primary bg-primary/5 border-l-2 border-primary'
+                : 'text-text-secondary hover:text-text-primary hover:bg-bg-surface2',
+            ].join(' ')}
+          >
+            {label}
+          </a>
+        ))
+      }
+      <div class="px-4 py-3 mt-1 border-t border-border-subtle">
+        <span class="flex items-center gap-2 text-text-muted font-body text-xs">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+          CPES L3
+        </span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconMenu = document.getElementById('icon-menu');
+  const iconClose = document.getElementById('icon-close');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = !mobileMenu?.classList.contains('hidden');
+    mobileMenu?.classList.toggle('hidden');
+    iconMenu?.classList.toggle('hidden', !isOpen);
+    iconClose?.classList.toggle('hidden', isOpen);
+    hamburger.setAttribute('aria-expanded', String(!isOpen));
+  });
+</script>

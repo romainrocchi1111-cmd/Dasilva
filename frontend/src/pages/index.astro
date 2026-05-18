@@ -1,0 +1,322 @@
+---
+import ProjectLayout from '../layouts/ProjectLayout.astro';
+---
+
+<ProjectLayout
+  title="Portail Scientifique — Simulations Quantiques Interactives"
+  description="Explorez les simulations quantiques interactives : propagation en temps imaginaire, oscillateur harmonique et visualisation scientifique."
+>
+  <!-- ═══════════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════════ -->
+  <section class="relative min-h-[calc(100vh-5rem)] flex items-center py-28">
+
+    <div class="relative z-10 w-full text-center">
+      <!-- Badge -->
+      <div class="flex justify-center mb-10" style="animation: fadeIn 0.5s ease both;">
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border-subtle font-mono text-xs text-text-secondary"
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+          Simulation quantique numérique · CPES L3
+        </span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="font-display font-bold leading-[1.1] mb-6">
+        <span
+          class="block text-5xl md:text-6xl lg:text-[4.5rem] text-text-primary"
+          style="animation: fadeIn 0.6s 0.1s ease both;"
+        >
+          Simulations
+          <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Quantiques</span>
+        </span>
+        <span
+          class="block text-5xl md:text-6xl lg:text-[4.5rem] text-text-primary mt-1"
+          style="animation: fadeIn 0.6s 0.2s ease both;"
+        >
+          Interactives
+        </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p
+        class="font-body text-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-14 leading-relaxed"
+        style="animation: fadeIn 0.6s 0.32s ease both;"
+      >
+        Propagation en temps imaginaire &bull; Oscillateur harmonique &bull; Visualisation scientifique
+      </p>
+
+      <!-- CTA Buttons -->
+      <div
+        class="flex flex-col sm:flex-row items-center justify-center gap-4"
+        style="animation: fadeIn 0.6s 0.42s ease both;"
+      >
+        <a
+          href="/parity"
+          class="group flex items-center gap-2.5 px-8 py-4 rounded-xl bg-primary hover:bg-primary-hover text-white font-display font-semibold text-sm transition-colors duration-200"
+        >
+          Module Parité
+          <svg
+            class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </a>
+        <a
+          href="/bases"
+          class="group flex items-center gap-2.5 px-8 py-4 rounded-xl bg-white border border-border-subtle text-text-primary font-display font-semibold text-sm transition-all duration-200 hover:border-primary/40 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+        >
+          Comparer les bases
+          <svg
+            class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="mt-20 flex justify-center opacity-40">
+        <div class="flex flex-col items-center gap-2 text-text-muted font-body text-xs">
+          <span>Découvrir les modules</span>
+          <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       MODULE CARDS
+  ════════════════════════════════════════════════ -->
+  <section class="py-28 border-t border-border-subtle" id="modules">
+    <div class="mb-16 text-center">
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-text-primary mb-4">
+        Modules de simulation
+      </h2>
+      <p class="font-body text-text-secondary text-base max-w-xl mx-auto leading-relaxed">
+        Trois modules indépendants couvrant simulation quantique numérique et modélisation de systèmes complexes.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+      <!-- ── Card 1: Parité ── -->
+      <div
+        class="group relative rounded-2xl p-8 bg-white border border-border-subtle transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:border-primary/30 cursor-pointer"
+        style="animation: fadeIn 0.4s 0.1s ease both;"
+      >
+        <!-- Icon -->
+        <div
+          class="mb-7 w-14 h-14 rounded-xl bg-primary/8 border border-primary/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-primary/15"
+        >
+          <svg
+            class="w-7 h-7 text-primary"
+            viewBox="0 0 32 22"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 11 Q5.5 2 9 11 Q12.5 20 16 11 Q19.5 2 23 11 Q26.5 20 30 11"
+              stroke="currentColor"
+              stroke-width="2.2"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+
+        <!-- Content -->
+        <h3 class="font-display font-semibold text-xl text-text-primary mb-3">
+          Module 1: Propagation par Parité
+        </h3>
+        <p class="font-body text-sm text-text-secondary mb-7 leading-relaxed">
+          Calcule les niveaux d'énergie de l'oscillateur harmonique en séparant les sous-espaces pair et impair via la base sinus.
+        </p>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mb-8">
+          {
+            ['Base sinus', 'Gram-Schmidt', 'RK4 / Euler'].map((tag) => (
+              <span class="px-2.5 py-1 rounded-md bg-blue-50 border border-blue-200 text-blue-700 font-mono text-xs font-medium">
+                {tag}
+              </span>
+            ))
+          }
+        </div>
+
+        <!-- CTA link -->
+        <a
+          href="/parity"
+          class="inline-flex items-center gap-2 text-primary font-display font-medium text-sm hover:text-primary-hover transition-colors duration-200 group-hover:gap-3"
+        >
+          Lancer
+          <svg
+            class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- ── Card 2: Bases & Hamiltoniens ── -->
+      <div
+        class="group relative rounded-2xl p-8 bg-white border border-border-subtle transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:border-secondary/30 cursor-pointer"
+        style="animation: fadeIn 0.4s 0.22s ease both;"
+      >
+        <!-- Icon -->
+        <div
+          class="mb-7 w-14 h-14 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center transition-colors duration-300 group-hover:bg-indigo-100"
+        >
+          <svg
+            class="w-7 h-7 text-secondary"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <rect x="2" y="2" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+            <rect x="11.25" y="2" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+            <rect x="20.5" y="2" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+            <rect x="2" y="11.25" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+            <rect x="11.25" y="11.25" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity="0.15" />
+            <rect x="20.5" y="11.25" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+            <rect x="2" y="20.5" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+            <rect x="11.25" y="20.5" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+            <rect x="20.5" y="20.5" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+          </svg>
+        </div>
+
+        <!-- Content -->
+        <h3 class="font-display font-semibold text-xl text-text-primary mb-3">
+          Module 2: Comparaison Bases &amp; Hamiltoniens
+        </h3>
+        <p class="font-body text-sm text-text-secondary mb-7 leading-relaxed">
+          Compare jusqu'à 4 combinaisons (base × hamiltonien) en parallèle avec courbes superposées et légende automatique.
+        </p>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mb-8">
+          {
+            ['Hermite', 'Legendre', 'Sinus', 'Overlay'].map((tag) => (
+              <span class="px-2.5 py-1 rounded-md bg-indigo-50 border border-indigo-200 text-indigo-700 font-mono text-xs font-medium">
+                {tag}
+              </span>
+            ))
+          }
+        </div>
+
+        <!-- CTA link -->
+        <a
+          href="/bases"
+          class="inline-flex items-center gap-2 text-secondary font-display font-medium text-sm hover:text-indigo-700 transition-colors duration-200 group-hover:gap-3"
+        >
+          Explorer
+          <svg
+            class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- ── Card 3: Banc de Poissons ── -->
+      <div
+        class="group relative rounded-2xl p-8 bg-white border border-border-subtle transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:border-cyan-300 cursor-pointer"
+        style="animation: fadeIn 0.4s 0.33s ease both;"
+      >
+        <!-- Icon -->
+        <div
+          class="mb-7 w-14 h-14 rounded-xl bg-cyan-50 border border-cyan-200 flex items-center justify-center transition-colors duration-300 group-hover:bg-cyan-100"
+        >
+          <svg
+            class="w-7 h-7 text-accent"
+            viewBox="0 0 32 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path d="M2 12 Q6 6 12 12 Q8 18 2 12Z" stroke="currentColor" stroke-width="1.6" fill="currentColor" fill-opacity="0.15" stroke-linejoin="round"/>
+            <path d="M10 8 Q15 3 20 8 Q16 13 10 8Z" stroke="currentColor" stroke-width="1.6" fill="currentColor" fill-opacity="0.10" stroke-linejoin="round"/>
+            <path d="M14 15 Q20 10 26 15 Q21 21 14 15Z" stroke="currentColor" stroke-width="1.6" fill="currentColor" fill-opacity="0.12" stroke-linejoin="round"/>
+            <circle cx="5.5" cy="11.5" r="0.9" fill="currentColor"/>
+            <circle cx="13.5" cy="7.5" r="0.9" fill="currentColor"/>
+            <circle cx="17.5" cy="14.5" r="0.9" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <!-- Content -->
+        <h3 class="font-display font-semibold text-xl text-text-primary mb-3">
+          Module 3 : Banc de Poissons
+        </h3>
+        <p class="font-body text-sm text-text-secondary mb-7 leading-relaxed">
+          Simulation temps réel d'un banc de 150 poissons avec le modèle de Vicsek, SpatialHash O(N·k) et export GIF animé.
+        </p>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mb-8">
+          {
+            ['Temps réel', '60fps', 'Export GIF'].map((tag) => (
+              <span class="px-2.5 py-1 rounded-md bg-cyan-50 border border-cyan-200 text-cyan-700 font-mono text-xs font-medium">
+                {tag}
+              </span>
+            ))
+          }
+        </div>
+
+        <!-- CTA link -->
+        <a
+          href="/poissons"
+          class="inline-flex items-center gap-2 text-accent font-display font-medium text-sm hover:text-cyan-700 transition-colors duration-200 group-hover:gap-3"
+        >
+          Observer
+          <svg
+            class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════ -->
+  <footer class="py-14 border-t border-border-subtle">
+    <div class="text-center">
+      <p class="font-body text-text-muted text-sm">
+        Portail Scientifique &mdash; Romain Rocchi, CPES L3 &mdash; 2026
+      </p>
+    </div>
+  </footer>
+</ProjectLayout>

@@ -1,0 +1,44 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import FishSimulator from '../../components/FishSimulator';
+import SimulatorErrorBoundary from '../../components/SimulatorErrorBoundary';
+
+const BADGES = [
+  { label: 'N=150 poissons',  bg: 'bg-cyan-50',    border: 'border-cyan-200',   text: 'text-cyan-700',   dot: 'bg-cyan-400' },
+  { label: 'Temps réel 60fps', bg: 'bg-blue-50',    border: 'border-blue-200',   text: 'text-blue-700',   dot: 'bg-blue-400' },
+  { label: 'Export GIF',       bg: 'bg-indigo-50',  border: 'border-indigo-200', text: 'text-indigo-700', dot: 'bg-indigo-400' },
+];
+---
+
+<ProjectLayout
+  title="Banc de Poissons — Portail Scientifique"
+  description="Simulation temps réel d'un banc de poissons avec le modèle de Vicsek, SpatialHash et export GIF."
+>
+  <!-- Page header -->
+  <div class="pt-10 pb-8">
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+      {BADGES.map(({ label, bg, border, text, dot }) => (
+        <span class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border font-mono text-xs font-medium ${bg} ${border} ${text}`}>
+          <span class={`w-1.5 h-1.5 rounded-full ${dot}`} aria-hidden="true"></span>
+          {label}
+        </span>
+      ))}
+    </div>
+
+    <h1 class="font-display font-bold text-3xl sm:text-4xl text-text-primary mb-3 leading-tight">
+      Module 3 — Banc de Poissons
+    </h1>
+
+    <p class="font-body text-text-secondary text-base sm:text-lg max-w-2xl leading-relaxed">
+      Simulation temps réel avec zone morte : répulsion, équilibre et attraction.
+    </p>
+  </div>
+
+  <!-- Divider -->
+  <div class="h-px bg-border-subtle mb-8" />
+
+  <!-- Simulator island -->
+  <SimulatorErrorBoundary client:load>
+    <FishSimulator client:load />
+  </SimulatorErrorBoundary>
+</ProjectLayout>

@@ -1,0 +1,42 @@
+/* Smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #e2e8f0; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* Selection */
+::selection { background: rgba(37, 99, 235, 0.15); color: #0f172a; }
+
+/* Focus ring */
+:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+
+/* Badge utility classes */
+.badge-blue   { @apply px-2 py-0.5 text-xs font-mono rounded bg-blue-100 text-blue-700 border border-blue-200; }
+.badge-purple { @apply px-2 py-0.5 text-xs font-mono rounded bg-indigo-100 text-indigo-700 border border-indigo-200; }
+.badge-cyan   { @apply px-2 py-0.5 text-xs font-mono rounded bg-cyan-100 text-cyan-700 border border-cyan-200; }
+
+/* Surface card — white with border, hover shadow */
+.card-surface {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.card-surface:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Number inputs — disable native spin arrows */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* Page transition fade — opacity only, no transform */
+.page-enter { animation: fadeIn 0.35s ease both; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

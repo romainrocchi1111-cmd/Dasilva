@@ -1,0 +1,213 @@
+---
+import ProjectLayout from '../layouts/ProjectLayout.astro';
+
+const STACK = [
+  {
+    category: 'Frontend',
+    color: 'primary',
+    items: [
+      { name: 'Astro 4', desc: 'Framework SSR avec îles React' },
+      { name: 'React 18', desc: 'Composants interactifs (client:load)' },
+      { name: 'Tailwind CSS 3', desc: 'Design system scientifique clair' },
+      { name: 'TypeScript 5', desc: 'Typage strict end-to-end' },
+    ],
+  },
+  {
+    category: 'Backend',
+    color: 'secondary',
+    items: [
+      { name: 'FastAPI', desc: 'API async avec Pydantic v2' },
+      { name: 'NumPy / SciPy', desc: 'Algèbre linéaire, bases orthogonales' },
+      { name: 'Matplotlib', desc: 'Figures PNG en base64 (Agg)' },
+      { name: 'Resend', desc: 'Envoi de graphiques par email' },
+    ],
+  },
+  {
+    category: 'Méthodes numériques',
+    color: 'accent',
+    items: [
+      { name: 'Temps imaginaire', desc: 'Propagation e^{−Hτ} → état fondamental' },
+      { name: 'Gram-Schmidt', desc: 'Orthogonalisation des états convergés' },
+      { name: 'RK4 / Euler', desc: 'Intégration pas à pas du propagateur' },
+      { name: 'Parité pair/impair', desc: 'Sous-espaces découplés par symétrie' },
+    ],
+  },
+];
+
+const COLOR_MAP: Record<string, { header: string; dot: string; card: string }> = {
+  primary:   { header: 'text-primary',   dot: 'bg-primary/50',   card: 'border-primary/25  hover:border-primary/50' },
+  secondary: { header: 'text-secondary', dot: 'bg-secondary/50', card: 'border-secondary/25 hover:border-secondary/50' },
+  accent:    { header: 'text-accent',    dot: 'bg-accent/50',    card: 'border-accent/25   hover:border-accent/50' },
+};
+---
+
+<ProjectLayout
+  title="À propos — Portail Scientifique"
+  description="Contexte scientifique, stack technique et auteur du portail de simulation quantique interactive."
+>
+  <div class="pt-10 pb-16 max-w-4xl">
+
+    <!-- ── Title ───────────────────────────────────────────────────────────── -->
+    <div class="mb-12">
+      <h1 class="font-display font-bold text-3xl sm:text-4xl text-text-primary mb-4 leading-tight">
+        À propos du portail
+      </h1>
+      <p class="font-body text-text-secondary text-base sm:text-lg leading-relaxed">
+        Portail Scientifique est un outil pédagogique interactif pour explorer la mécanique
+        quantique numérique — conçu dans le cadre d'un projet de simulation en CPES L3.
+      </p>
+    </div>
+
+    <!-- ── Scientific context ──────────────────────────────────────────────── -->
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-text-primary mb-5 flex items-center gap-2">
+        <span class="w-6 h-6 rounded-md bg-blue-50 border border-blue-200 flex items-center justify-center text-primary text-xs">ψ</span>
+        Contexte scientifique
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- ITP -->
+        <div class="rounded-xl border border-border-subtle bg-white p-5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow duration-200">
+          <h3 class="font-display font-semibold text-text-primary text-sm mb-2">
+            Propagation en temps imaginaire
+          </h3>
+          <p class="font-body text-text-secondary text-sm leading-relaxed">
+            En substituant le temps réel <span class="font-mono text-accent">t → −iτ</span>,
+            l'équation de Schrödinger devient une équation de diffusion. La propagation
+            <span class="font-mono text-primary">e<sup>−Hτ</sup></span> filtre naturellement
+            les états excités, convergeant vers l'état fondamental (ou chaque niveau par
+            Gram-Schmidt).
+          </p>
+        </div>
+
+        <!-- Harmonic oscillator -->
+        <div class="rounded-xl border border-border-subtle bg-white p-5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow duration-200">
+          <h3 class="font-display font-semibold text-text-primary text-sm mb-2">
+            Oscillateur harmonique quantique
+          </h3>
+          <p class="font-body text-text-secondary text-sm leading-relaxed">
+            L'hamiltonien <span class="font-mono text-accent">H = −½∂²/∂x² + ½ω²x²</span>
+            possède des niveaux d'énergie analytiques
+            <span class="font-mono text-primary">E_n = (n + ½)ℏω</span>.
+            Ce cas exact permet de quantifier précisément les erreurs numériques des
+            différentes bases et méthodes.
+          </p>
+        </div>
+
+        <!-- Parity subspaces -->
+        <div class="rounded-xl border border-border-subtle bg-white p-5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow duration-200">
+          <h3 class="font-display font-semibold text-text-primary text-sm mb-2">
+            Séparation par parité
+          </h3>
+          <p class="font-body text-text-secondary text-sm leading-relaxed">
+            L'hamiltonien commute avec l'opérateur de parité. Les sous-espaces pair et
+            impair sont découplés : on peut propager indépendamment dans chacun, divisant
+            par deux la taille de la matrice et doublant l'efficacité du calcul.
+          </p>
+        </div>
+
+        <!-- Functional bases -->
+        <div class="rounded-xl border border-border-subtle bg-white p-5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow duration-200">
+          <h3 class="font-display font-semibold text-text-primary text-sm mb-2">
+            Bases fonctionnelles
+          </h3>
+          <p class="font-body text-text-secondary text-sm leading-relaxed">
+            Trois bases sont comparées : <span class="font-mono text-primary">Sinus</span>
+            (boîte infinie), <span class="font-mono text-secondary">Hermite</span>
+            (fonctions propres analytiques) et <span class="font-mono text-accent">Legendre</span>
+            (polynômes orthogonaux sur [−L, L]). Chaque base interact différemment avec
+            les deux discrétisations hamiltoniennes disponibles.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Stack ───────────────────────────────────────────────────────────── -->
+    <section class="mb-12">
+      <h2 class="font-display font-semibold text-xl text-text-primary mb-5 flex items-center gap-2">
+        <span class="w-6 h-6 rounded-md bg-indigo-50 border border-indigo-200 flex items-center justify-center text-secondary text-xs">⚙</span>
+        Stack technique
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {STACK.map(({ category, color, items }) => {
+          const c = COLOR_MAP[color];
+          return (
+            <div class={`rounded-xl border bg-white overflow-hidden ${c.card} transition-all duration-200 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]`}>
+              <div class={`px-4 py-3 border-b border-border-subtle font-display font-semibold text-xs uppercase tracking-widest ${c.header}`}>
+                {category}
+              </div>
+              <ul class="px-4 py-3 flex flex-col gap-2.5">
+                {items.map(({ name, desc }) => (
+                  <li class="flex items-start gap-2">
+                    <span class={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${c.dot}`} aria-hidden="true"></span>
+                    <span class="font-body text-sm">
+                      <span class="font-mono text-text-primary">{name}</span>
+                      <span class="text-text-muted"> — {desc}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- ── Author ──────────────────────────────────────────────────────────── -->
+    <section>
+      <h2 class="font-display font-semibold text-xl text-text-primary mb-5 flex items-center gap-2">
+        <span class="w-6 h-6 rounded-md bg-cyan-50 border border-cyan-200 flex items-center justify-center text-accent text-xs">✦</span>
+        Auteur
+      </h2>
+
+      <div class="rounded-xl border border-border-subtle bg-white p-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+
+          <!-- Avatar placeholder -->
+          <div class="w-14 h-14 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center flex-shrink-0">
+            <span class="font-display font-bold text-xl text-primary select-none">R</span>
+          </div>
+
+          <!-- Info -->
+          <div class="flex flex-col gap-1">
+            <p class="font-display font-semibold text-text-primary text-lg">Romain Rocchi</p>
+            <p class="font-body text-text-secondary text-sm">
+              Étudiant — CPES L3 · Promotion 2026
+            </p>
+            <p class="font-body text-text-muted text-xs mt-1">
+              Projet de simulation numérique en mécanique quantique
+            </p>
+          </div>
+
+          <!-- GitHub badge -->
+          <div class="sm:ml-auto flex-shrink-0">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border-subtle bg-bg-base
+                     font-body text-sm text-text-secondary hover:text-text-primary hover:border-primary/40
+                     hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-150"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483
+                     0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466
+                     -.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832
+                     .092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688
+                     -.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004
+                     1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7
+                     1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338
+                     -.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</ProjectLayout>
