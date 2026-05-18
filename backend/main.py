@@ -11,9 +11,8 @@ app = FastAPI(title="Portail Scientifique API", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://your-portail.vercel.app",
+        "https://dasilva-cmhl.vercel.app",
         "http://localhost:4321",
-        os.getenv("FRONTEND_URL", ""),
     ],
     allow_methods=["POST", "GET", "OPTIONS"],
     allow_headers=["Content-Type"],
