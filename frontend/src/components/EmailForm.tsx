@@ -79,7 +79,7 @@ export default function EmailForm({ figures, module, onClose }: EmailFormProps) 
         .map((f) => ({ filename: `${f.key}.png`, data_b64: f.src, caption: f.title })),
     };
 
-    const base = 'https://dasilva-production.up.railway.app';
+    const base = 'https://captivating-strength-production-9142.up.railway.app';
 
     try {
       const res = await fetch(`${base}/api/send-graphs`, {

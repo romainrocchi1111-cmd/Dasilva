@@ -111,7 +111,7 @@ export default function ParitySimulator() {
     setIsLoading(true);
     setError(null);
     setResult(null);
-    const base = 'https://dasilva-production.up.railway.app';
+    const base = 'https://captivating-strength-production-9142.up.railway.app';
     try {
       const res = await fetch(`${base}/api/parity/run`, {
         method: 'POST',

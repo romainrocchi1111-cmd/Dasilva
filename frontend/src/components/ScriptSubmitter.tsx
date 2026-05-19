@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 
-const BACKEND = 'https://dasilva-production.up.railway.app';
+const BACKEND = 'https://captivating-strength-production-9142.up.railway.app';
 
 const PROGRESS_STEPS = [
   'Vérification de la syntaxe...',
